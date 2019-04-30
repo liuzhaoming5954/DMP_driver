@@ -80,14 +80,9 @@ void IntegrateStep_DMP(struct struct_dmp *DMP, float32_t *s, float32_t *x, float
    */
 void getLines(struct struct_dmp *DMP, float32_t *input_s, float32_t *lines)
 {
-//	for(int i_line=0; i_line<DMP.basis_number_; i_line++)
-//	{
-//		lines[i_line] = DMP.slopes_[i_line]*((*input_s)-DMP.centers_[i_line]);
-//		lines[i_line] += DMP.offsets_[i_line];
-//	}
-	for(int i_line=0; i_line<DMP->basis_number_; i_line++)
+	for(int i_line=0; i_line < DMP->basis_number_; i_line++)
 	{
-		lines[i_line] = DMP->slopes_[i_line]*((*input_s)-DMP->centers_[i_line]);
+		lines[i_line] = DMP->slopes_[i_line]*((*input_s) - DMP->centers_[i_line]);
 		lines[i_line] += DMP->offsets_[i_line];
 	}
 }
