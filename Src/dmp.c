@@ -116,9 +116,6 @@ void kernelActivations(struct struct_dmp *DMP, float32_t *input_s, float32_t *ke
 	}
 	// Normalize the basis value
 	float32_t sum_kernel_activations=0.0;
-	//for(int i_sample=0; i_sample<n_samples; i_sample++)
-	//{
-		//sum_kernel_activations = kernel_activations.row(i_sample).sum();
 	for(int bb=0; bb<n_basis_functions; bb++)
 	{
 		sum_kernel_activations += kernel_activations[bb];
@@ -133,7 +130,6 @@ void kernelActivations(struct struct_dmp *DMP, float32_t *input_s, float32_t *ke
 			// Standard case, normalize so that they sum to 1.0
 			kernel_activations[i_basis] /= sum_kernel_activations;			
 	}
-	//}
 }
 
  /**
