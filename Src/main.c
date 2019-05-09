@@ -95,14 +95,17 @@ int main(void)
   /* USER CODE BEGIN 1 */
 	// init DMP parameters
 	// function_approximators
-	DMP.centers_[0]=0.000000; DMP.centers_[1]=0.111111; DMP.centers_[2]=0.222222; DMP.centers_[3]=0.333333; DMP.centers_[4]=0.444444;
-	DMP.centers_[5]=0.555556; DMP.centers_[6]=0.666667; DMP.centers_[7]=0.777778; DMP.centers_[8]=0.888889; DMP.centers_[9]=1.000000;
-	DMP.widths_[0]=0.051590; DMP.widths_[1]=0.051590; DMP.widths_[2]=0.051590; DMP.widths_[3]=0.051590; DMP.widths_[4]=0.051590;
-	DMP.widths_[5]=0.051590; DMP.widths_[6]=0.051590; DMP.widths_[7]=0.051590; DMP.widths_[8]=0.051590; DMP.widths_[9]=0.051590;
-	DMP.slopes_[0]=-955.379830; DMP.slopes_[1]=-333.353083; DMP.slopes_[2]=156.464658; DMP.slopes_[3]=393.931184; DMP.slopes_[4]=368.822926;
-	DMP.slopes_[5]=55.651139; DMP.slopes_[6]=30.968628; DMP.slopes_[7]=0.739617; DMP.slopes_[8]=-32.856425; DMP.slopes_[9]=-55.381268;
-	DMP.offsets_[0]=-13.586293; DMP.offsets_[1]=-58.510694; DMP.offsets_[2]=-136.955314; DMP.offsets_[3]=-201.693496; DMP.offsets_[4]=-187.162116;
-	DMP.offsets_[5]=-33.711216; DMP.offsets_[6]=-18.821892; DMP.offsets_[7]=3.057061; DMP.offsets_[8]=31.034454; DMP.offsets_[9]=51.864122;
+	DMP.centers_[0]=0.018316; DMP.centers_[1]=0.127392; DMP.centers_[2]=0.236468; DMP.centers_[3]=0.345544; DMP.centers_[4]=0.454620;
+	DMP.centers_[5]=0.563696; DMP.centers_[6]=0.672772; DMP.centers_[7]=0.781848; DMP.centers_[8]=0.890924; DMP.centers_[9]=1.000000;
+	
+	DMP.widths_[0]=0.050645; DMP.widths_[1]=0.050645; DMP.widths_[2]=0.050645; DMP.widths_[3]=0.050645; DMP.widths_[4]=0.050645;
+	DMP.widths_[5]=0.050645; DMP.widths_[6]=0.050645; DMP.widths_[7]=0.050645; DMP.widths_[8]=0.050645; DMP.widths_[9]=0.050645;
+	
+	DMP.slopes_[0]=158.926305; DMP.slopes_[1]=-1323.948000; DMP.slopes_[2]=-1411.688617; DMP.slopes_[3]=19.631479; DMP.slopes_[4]=273.245066;
+	DMP.slopes_[5]=265.394108; DMP.slopes_[6]=223.404527; DMP.slopes_[7]=183.825189; DMP.slopes_[8]=151.934707; DMP.slopes_[9]=121.071957;
+	
+	DMP.offsets_[0]=26.418002; DMP.offsets_[1]=120.373333; DMP.offsets_[2]=102.306187; DMP.offsets_[3]=-286.973893; DMP.offsets_[4]=-381.651993;
+	DMP.offsets_[5]=-376.964855; DMP.offsets_[6]=-351.133944; DMP.offsets_[7]=-322.549734; DMP.offsets_[8]=-296.053101; DMP.offsets_[9]=-267.312239;
 	
 	// init DMP state
 	DMP.dt = 0.01;
