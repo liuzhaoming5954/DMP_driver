@@ -26,7 +26,14 @@ Project File Date:  04/03/2019
 
 <h2>Output:</h2>
 Build target 'DMP_driver'
-"DMP_driver\DMP_driver.axf" - 0 Error(s), 0 Warning(s).
+compiling dmp.c...
+..\Src\dmp.c(124): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+                if (sum_kernel_activations==0.0)
+..\Src\dmp.c: 1 warning, 0 errors
+linking...
+Program Size: Code=11926 RO-data=674 RW-data=56 ZI-data=1432  
+FromELF: creating hex file...
+"DMP_driver\DMP_driver.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 

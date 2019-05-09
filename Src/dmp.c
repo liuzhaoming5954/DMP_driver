@@ -8,9 +8,7 @@ extern float32_t value_s;
   */
 void DifferentialEquation_PhaseSystem(struct struct_dmp *DMP, float32_t *s, float32_t *sd)
 {
-		//sd[0] = -DMP.alpha_*s[0]/DMP.tau_;
 	sd[0] = -(DMP->alpha_)*s[0]/(DMP->tau_);
-	//sd[0] = -s[0]/(DMP->tau_);
 }
 
  /**

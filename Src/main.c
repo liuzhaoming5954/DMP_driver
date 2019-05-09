@@ -115,7 +115,7 @@ int main(void)
 	DMP.basis_number_ = 10;
 	
 	// init spring_damping 
-	DMP.alpha_ = 15.0;
+	DMP.alpha_ = 4.0;
 	DMP.spring_constant_ = 100.0;
 	DMP.damping_coefficient_ = 20.0;
 	DMP.mass_ = 1.0;	
