@@ -23,8 +23,6 @@ void DifferentialEquation_PhaseSystem(struct struct_dmp *DMP, float32_t *s, floa
 void IntegrateStep_phase(struct struct_dmp *DMP, float32_t *s, float32_t *sd_updated)
 {
 	// Simple Euler integration
-	//DifferentialEquation_PhaseSystem(s,sd_updated);
-	//s[0] = s[0] + dt*sd_updated[0];
 	DifferentialEquation_PhaseSystem(DMP, s, sd_updated);
 	s[0] = s[0] + DMP->dt*sd_updated[0];
 }
@@ -37,17 +35,19 @@ void IntegrateStep_phase(struct struct_dmp *DMP, float32_t *s, float32_t *sd_upd
   */
 void DifferentialEquation_DMPSystem(struct struct_dmp *DMP, float32_t *s, float32_t *x, float32_t *xd)
 {
-	//xd[0] = (-DMP.spring_constant_*(x[1]-DMP.attractor_state_) - DMP.damping_coefficient_*x[0])/(DMP.mass_*DMP.tau_)+(*s)*Compute_ForceFunction(s)/DMP.tau_;
 	float32_t f_value[1];
-//	FunctionApproximatorLWR_predict(s, f_value);
-//	xd[0] = (-DMP.spring_constant_*(x[1]-DMP.attractor_state_) - DMP.damping_coefficient_*x[0])/(DMP.mass_*DMP.tau_)+(*s)*f_value[0]/DMP.tau_;
-//	xd[1] = x[0]/DMP.tau_;
-	FunctionApproximatorLWR_predict(DMP, s, f_value);
-	xd[0] = (-DMP->spring_constant_*(x[1]-DMP->attractor_state_) - DMP->damping_coefficient_*x[0])/(DMP->mass_*DMP->tau_)+(*s)*f_value[0]/DMP->tau_;
+
+	//此处取消函数估计器，重写一个
+	//FunctionApproximatorLWR_predict(DMP, s, f_value);
+	FunctionApproximatorNBFS_predict(DMP, s, f_value);
+	//xd[0] = (-DMP->spring_constant_*(x[1]-DMP->attractor_state_) - DMP->damping_coefficient_*x[0])/(DMP->mass_*DMP->tau_)+(*s)*f_value[0]/DMP->tau_;
+	xd[0] = DMP->K_ * (DMP->attractor_state_ - x[1]) - DMP->D_ * x[0] + f_value[0];
 	xd[1] = x[0]/DMP->tau_;
 	
 	// LZM Debug
-	value_s = (*s)*f_value[0]/DMP->tau_;
+	//value_s = (*s)*f_value[0]/DMP->tau_;
+	value_s = f_value[0]/DMP->tau_;
+	value_s = value_s;
 }
 
  /**
@@ -76,6 +76,7 @@ void IntegrateStep_DMP(struct struct_dmp *DMP, float32_t *s, float32_t *x, float
    * \param[in]  s         the phase term s
 	 * \param[out] lines     the sum of lines 
    */
+/*
 void getLines(struct struct_dmp *DMP, float32_t *input_s, float32_t *lines)
 {
 	for(int i_line=0; i_line < DMP->basis_number_; i_line++)
@@ -84,6 +85,7 @@ void getLines(struct struct_dmp *DMP, float32_t *input_s, float32_t *lines)
 		lines[i_line] += DMP->offsets_[i_line];
 	}
 }
+*/
 
  /**
    * Get kernel_activations     
@@ -91,6 +93,7 @@ void getLines(struct struct_dmp *DMP, float32_t *input_s, float32_t *lines)
    * \param[in]  s                      the phase term s
 	 * \param[out] kernel_activations     the sum of lines 
    */
+/*
 void kernelActivations(struct struct_dmp *DMP, float32_t *input_s, float32_t *kernel_activations)
 {
 	int n_basis_functions = DMP->basis_number_;
@@ -129,6 +132,7 @@ void kernelActivations(struct struct_dmp *DMP, float32_t *input_s, float32_t *ke
 			kernel_activations[i_basis] /= sum_kernel_activations;			
 	}
 }
+*/
 
  /**
    * Integrate the system one time step.
@@ -136,6 +140,7 @@ void kernelActivations(struct struct_dmp *DMP, float32_t *input_s, float32_t *ke
    * \param[in]  input_s    current state s
    * \param[out] output  predict value
    */
+/*
 void FunctionApproximatorLWR_predict(struct struct_dmp *DMP, float32_t *input_s, float32_t *output)
 {
 	float32_t lines_one_prealloc_[10],activations_one_prealloc_[10],pDst_[10];
@@ -159,3 +164,55 @@ void FunctionApproximatorLWR_predict(struct struct_dmp *DMP, float32_t *input_s,
 		(*output) += pDst_[i];
 	}
 }
+*/
+
+void FunctionApproximatorNBFS_predict(struct struct_dmp *DMP, float32_t *input_s, float32_t *output)
+{
+	float32_t psi[20];
+	float32_t f_num, f_denom;
+	//float32_t temp;
+	int i;
+	f_num = 0;
+	f_denom = 0;
+	i = 0;
+	
+	for(i=0; i<DMP->basis_number_; i++)
+	{
+		psi[i] = exp((-DMP->h) * (((*input_s)/DMP->d)-(DMP->centers_[i]))*(((*input_s)/DMP->d)-(DMP->centers_[i])));
+		//psi[i] = exp(-DMP->h * temp);
+		f_num = f_num + psi[i]*DMP->weight_[i];
+		f_denom = f_denom + psi[i];
+	}
+	
+	*output = (f_num * (*input_s) * (DMP->attractor_state_ - DMP->initial_state_)) / f_denom;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

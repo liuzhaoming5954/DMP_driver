@@ -95,38 +95,47 @@ int main(void)
   /* USER CODE BEGIN 1 */
 	// init DMP parameters
 	// function_approximators
-	DMP.centers_[0]=0.018316; DMP.centers_[1]=0.127392; DMP.centers_[2]=0.236468; DMP.centers_[3]=0.345544; DMP.centers_[4]=0.454620;
-	DMP.centers_[5]=0.563696; DMP.centers_[6]=0.672772; DMP.centers_[7]=0.781848; DMP.centers_[8]=0.890924; DMP.centers_[9]=1.000000;
+	DMP.centers_[0]=-55.2314; DMP.centers_[1]=-54.2134; DMP.centers_[2]=-53.2134; DMP.centers_[3]=-52.2134; DMP.centers_[4]=-51.2134;
+	DMP.centers_[5]=-50.2134; DMP.centers_[6]=-49.2134; DMP.centers_[7]=-48.2134; DMP.centers_[8]=-47.2134; DMP.centers_[9]=-46.2134;
+	DMP.centers_[10]=-45.2134; DMP.centers_[11]=-44.2134; DMP.centers_[12]=-43.2134; DMP.centers_[13]=-42.2134; DMP.centers_[14]=-41.2134;
+	DMP.centers_[15]=-40.2134; DMP.centers_[16]=-39.2134; DMP.centers_[17]=-38.2134; DMP.centers_[18]=-37.2134; DMP.centers_[19]=-36.2134;
+	DMP.d = -0.0181;
+	DMP.h = 0.5;
 	
-	DMP.widths_[0]=0.050645; DMP.widths_[1]=0.050645; DMP.widths_[2]=0.050645; DMP.widths_[3]=0.050645; DMP.widths_[4]=0.050645;
-	DMP.widths_[5]=0.050645; DMP.widths_[6]=0.050645; DMP.widths_[7]=0.050645; DMP.widths_[8]=0.050645; DMP.widths_[9]=0.050645;
+	//DMP.widths_[0]=0.050645; DMP.widths_[1]=0.050645; DMP.widths_[2]=0.050645; DMP.widths_[3]=0.050645; DMP.widths_[4]=0.050645;
+	//DMP.widths_[5]=0.050645; DMP.widths_[6]=0.050645; DMP.widths_[7]=0.050645; DMP.widths_[8]=0.050645; DMP.widths_[9]=0.050645;
 	
-	DMP.slopes_[0]=158.926305; DMP.slopes_[1]=-1323.948000; DMP.slopes_[2]=-1411.688617; DMP.slopes_[3]=19.631479; DMP.slopes_[4]=273.245066;
-	DMP.slopes_[5]=265.394108; DMP.slopes_[6]=223.404527; DMP.slopes_[7]=183.825189; DMP.slopes_[8]=151.934707; DMP.slopes_[9]=121.071957;
+	//DMP.slopes_[0]=158.926305; DMP.slopes_[1]=-1323.948000; DMP.slopes_[2]=-1411.688617; DMP.slopes_[3]=19.631479; DMP.slopes_[4]=273.245066;
+	//DMP.slopes_[5]=265.394108; DMP.slopes_[6]=223.404527; DMP.slopes_[7]=183.825189; DMP.slopes_[8]=151.934707; DMP.slopes_[9]=121.071957;
 	
-	DMP.offsets_[0]=26.418002; DMP.offsets_[1]=120.373333; DMP.offsets_[2]=102.306187; DMP.offsets_[3]=-286.973893; DMP.offsets_[4]=-381.651993;
-	DMP.offsets_[5]=-376.964855; DMP.offsets_[6]=-351.133944; DMP.offsets_[7]=-322.549734; DMP.offsets_[8]=-296.053101; DMP.offsets_[9]=-267.312239;
+	//DMP.offsets_[0]=26.418002; DMP.offsets_[1]=120.373333; DMP.offsets_[2]=102.306187; DMP.offsets_[3]=-286.973893; DMP.offsets_[4]=-381.651993;
+	//DMP.offsets_[5]=-376.964855; DMP.offsets_[6]=-351.133944; DMP.offsets_[7]=-322.549734; DMP.offsets_[8]=-296.053101; DMP.offsets_[9]=-267.312239;
+	
+	DMP.weight_[0]=-4.9104; DMP.weight_[1]=-4.8633; DMP.weight_[2]=-4.7688; DMP.weight_[3]=-4.6083; DMP.weight_[4]=-4.3687; 
+	DMP.weight_[5]=-4.0286; DMP.weight_[6]=-3.5579; DMP.weight_[7]=-2.9235; DMP.weight_[8]=-2.1047; DMP.weight_[9]=-1.1385;
+	DMP.weight_[10]=-0.2091; DMP.weight_[11]=0.4113; DMP.weight_[12]=0.6699; DMP.weight_[13]=0.7232; DMP.weight_[14]=0.6908;
+	DMP.weight_[15]=0.6181; DMP.weight_[16]=0.5161; DMP.weight_[17]=0.3867; DMP.weight_[18]=0.2536; DMP.weight_[19]=0.1523;
 	
 	// init DMP state
 	DMP.dt = 0.01;
-	DMP.tau_ = 8.43;
+	DMP.tau_ = 1;
 	DMP.initial_state_ = -0.747175;
 	DMP.attractor_state_ = 0.745890;
-	DMP.basis_number_ = 10;
+	DMP.basis_number_ = 20;
 	
 	// init spring_damping 
-	DMP.alpha_ = 4.0;
-	DMP.spring_constant_ = 100.0;
-	DMP.damping_coefficient_ = 20.0;
-	DMP.mass_ = 1.0;	
+	DMP.alpha_ = 0.05;
+//	DMP.spring_constant_ = 5.0;
+//	DMP.damping_coefficient_ = 10.0;
+//	DMP.mass_ = 1.0;	
+	DMP.K_ = 5.0;
+	DMP.D_ = 10.0;
 	
-
-	//int stamp_number;
 	// init state variables
 	x[0] = 0; //x1
 	x[1] = DMP.initial_state_;  //x2
 	s[0] = 1;
-	sd[0] = 0;
+	sd[0] = -4/8.43;
 
   /* USER CODE END 1 */
 
@@ -154,7 +163,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   //	int stamp_number;
 
-	DMP.stamp_number = DMP.tau_/DMP.dt;
+	DMP.stamp_number = 844;//DMP.tau_/DMP.dt;
   //for(int i=0; i<DMP.stamp_number; i++)
 	//{
 	//	IntegrateStep_phase(&DMP, s, sd);
